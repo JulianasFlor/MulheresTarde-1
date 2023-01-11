@@ -1,5 +1,3 @@
-
-
 drop database if exists academia1; 
 
 create database academia1 character set utf8 COLLATE utf8_general_ci;
@@ -25,6 +23,7 @@ create table aluno(
 	numerocasa smallint not null,
 	complemento varchar(30), 
 	foto varchar(255),
+	senha varchar(255) not null;
 	foreign key(cep)references endereco(cep));
 	
 create table funcionario(
@@ -37,6 +36,7 @@ create table funcionario(
 	numerocasa smallint not null,
 	complemento varchar(30), 
 	foto varchar(255),
+	senha varchar(255) not null;
 	foreign key(cep)references endereco(cep));
 	
 create table professor(
@@ -45,14 +45,11 @@ create table professor(
 	cpffuncionario char(14)not null,
 	foreign key(cpffuncionario)references funcionario(cpffuncionario));
 
-
 create table atividade(
 	idatividade integer primary key auto_increment,
 		nomeatividade varchar(60)not null,
 		descricao varchar(100)not null);	
 
-
-		
 create table habilitaprofessor(
 	idhabilitacao integer primary key auto_increment,
 	idatividade integer not null,
@@ -60,7 +57,6 @@ create table habilitaprofessor(
 	foreign key(idatividade)references atividade(idatividade),
 	foreign key(idprofessor)references professor(idprofessor));	
 	
-
 create table aula(
 	idaula integer primary key auto_increment,
 	dataaula date not null,
@@ -70,14 +66,12 @@ create table aula(
 	foreign key(idprofessor)references professor(idprofessor),
 	foreign key(idatividade)references atividade(idatividade));	
 
-
 create table aulaaluno(
 	idaulaaluno integer primary key auto_increment,
 	matricula integer not null,
 	idaula integer not null,
 	foreign key(matricula)references aluno(matricula),
 	foreign key(idaula)references aula(idaula));
-	
 	
 create table produto(
 	codigoproduto integer primary key auto_increment,
@@ -86,8 +80,6 @@ create table produto(
 	valor double not null,
 	tamanho char(2)not null,
 	quantidade integer not null);
-	
-
 	
 create table venda(
 	idvenda integer primary key auto_increment,
@@ -99,12 +91,9 @@ create table venda(
 	foreign key(codigoproduto)references produto(codigoproduto),
 	foreign key(cpffuncionario)references funcionario(cpffuncionario));
 	
-	
-
 insert into endereco(cep,rua,bairro,cidade,uf)VALUES
 ('23085-610','Rua Padre Pauwels','Campo Grande','Rio de Janeiro','RJ'),
 ('26551-090','Travessa Elpidio','Cruzeiro do Sul','Mesquita','RJ');
-
 
 insert into aluno(nome,telefone,rg,cpf,datanascimento,cep,numerocasa,complemento,foto,sexo)VALUES
 ('Maria','(21)99886-1055','12555','123456893-10','2001-08-01','23085-610',31,'ap 102','vazio','F'),
@@ -141,7 +130,6 @@ insert into produto(nome,cor,valor,tamanho,quantidade)VALUES
 insert into venda(data,valor,quantidade,codigoproduto,cpffuncionario)VALUES
 ('2022-12-05',300,2,1,'789'),
 ('2022-12-05',120,1,2,'789');
-
 
 PESQUISAS NAS TABELAS
 
